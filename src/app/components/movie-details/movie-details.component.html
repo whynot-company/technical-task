@@ -1,0 +1,17 @@
+<div class="text-white p-5 rounded-lg shadow-lg mt-5" *ngIf="movie$ | async as movie; else loading">
+  <h2 class="text-yellow-400">{{ movie.title }}</h2>
+  <p class="mt-1 mb-1"><strong class="text-green-400">Director:</strong> {{ movie.director }}</p>
+  <p class="mt-1 mb-1"><strong class="text-green-400">Producer:</strong> {{ movie.producer }}</p>
+  <p class="mt-1 mb-1"><strong class="text-green-400">Release Date:</strong> {{ movie.release_date }}</p>
+  <p class="mt-1 mb-1">{{ movie.opening_crawl }}</p>
+
+  <h3 class="text-teal-400 mt-5">Characters:</h3>
+  <ul class="list-none p-0 mt-2" *ngIf="characters$ | async as characters; else loadingCharacters">
+    <li *ngFor="let character of characters">
+      <a class="text-blue-400 no-underline hover:text-yellow-400 hover:underline" [routerLink]="['/characters', getCharacterId(character.url)]">{{ character.name }}</a>
+    </li>
+  </ul>
+</div>
+
+<ng-template #loadingCharacters>Loading characters...</ng-template>
+<ng-template #loading>Loading movie details...</ng-template>

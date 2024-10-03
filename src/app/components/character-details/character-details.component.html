@@ -1,0 +1,32 @@
+<div *ngIf="loading$ | async; else content" class="text-center text-white text-lg p-5">
+  <p>Loading character details...</p>
+</div>
+
+<ng-template #content>
+  <ng-container *ngIf="character$ | async as character; else noCharacter">
+    <div class="text-white p-5 rounded-lg m-5">
+      <h2 class="text-yellow-400 mb-4">{{ character.name }}</h2>
+      <p class="mb-3"><strong class="text-green-400">Height:</strong> {{ character.height }}</p>
+      <p class="mb-3"><strong class="text-green-400">Mass:</strong> {{ character.mass }}</p>
+      <p class="mb-3"><strong class="text-green-400">Hair color:</strong> {{ character.hair_color }}</p>
+      <p class="mb-3"><strong class="text-green-400">Skin color:</strong> {{ character.skin_color }}</p>
+      <p class="mb-3"><strong class="text-green-400">Eye color:</strong> {{ character.eye_color }}</p>
+      <p class="mb-3"><strong class="text-green-400">Birth year:</strong> {{ character.birth_year }}</p>
+      <p class="mb-3"><strong class="text-green-400">Gender:</strong> {{ character.gender }}</p>
+
+      <h3 class="text-teal-400 mt-5 mb-3">Movies:</h3>
+      <ul class="list-none p-0" *ngIf="films$ | async as films; else loadingFilms">
+        <li *ngFor="let film of films">
+          <a class="text-blue-300 no-underline hover:text-yellow-400 hover:underline" [routerLink]="['/movies', film.id]">{{ film.title }} ({{ film.release_date }})</a>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+  <ng-template #noCharacter>
+    <p>No character details available.</p>
+  </ng-template>
+</ng-template>
+
+<ng-template #loadingFilms>
+  <p>Loading films...</p>
+</ng-template>

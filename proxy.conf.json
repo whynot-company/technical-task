@@ -1,0 +1,9 @@
+{
+  "/api/*": {
+    "target": "https://swapi.dev",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/api": ""}
+  }
+}

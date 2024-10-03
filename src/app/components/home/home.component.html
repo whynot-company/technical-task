@@ -1,0 +1,13 @@
+<div class="text-white p-5 rounded-lg shadow-lg">
+  <h1 class="text-yellow-400 mb-5">Movies List</h1>
+  <ul *ngIf="movies$ | async as movies; else loading" class="list-none p-0">
+    <li *ngFor="let movie of movies" class="mb-2">
+      <a [routerLink]="['/movies', movie.episode_id]" class="block p-2 hover:text-yellow-400 no-underline hover:underline text-gray-300">
+        {{ movie.title }}
+      </a>
+    </li>
+  </ul>
+  <ng-template #loading>
+    <p class="text-center text-gray-400">Loading...</p>
+  </ng-template>
+</div>
